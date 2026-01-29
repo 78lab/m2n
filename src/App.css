@@ -1,0 +1,71 @@
+/* 전체 초기화 */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  overflow: hidden; /* 스크롤은 에디터 내부에서만 */
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* 상단 헤더 */
+.header {
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.logo { font-weight: bold; font-size: 1.2rem; color: #333; }
+
+/* 복사 버튼 (네이버 그린 색상) */
+.copy-btn {
+  background-color: #03c75a;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.copy-btn:hover { background-color: #02b150; }
+
+/* 에디터 영역 (좌우 분할) */
+.editor-wrap {
+  display: flex;
+  flex: 1; /* 남은 공간 모두 차지 */
+  height: calc(100vh - 60px);
+}
+
+/* 왼쪽 입력창 */
+.editor-input {
+  width: 50%;
+  border: none;
+  border-right: 1px solid #ddd;
+  padding: 30px;
+  resize: none;
+  font-size: 16px;
+  font-family: 'Consolas', monospace; /* 코딩 폰트 */
+  background-color: #282c34;
+  color: #abb2bf;
+  outline: none;
+  line-height: 1.6;
+}
+
+/* 오른쪽 미리보기 */
+.editor-preview {
+  width: 50%;
+  padding: 30px 40px; /* 네이버 블로그와 유사한 여백 */
+  overflow-y: auto;
+  background-color: #fff;
+}
