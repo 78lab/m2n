@@ -145,7 +145,17 @@ function App() {
     const processMarkdown = async () => {
       try {
         let cleanMarkdown = markdown.replace(/^---[\s\S]*?---\n/, '');
+
+        // 1. [Bold 처리] 붙여쓰기 ** 지원
         cleanMarkdown = cleanMarkdown.replace(/\*\*([^\n]+?)\*\*/g, '<strong>$1</strong>');
+
+        // ★★★ 2. [취소선 처리 핵심 로직] ★★★
+        // (1) "앞/뒤에 공백이 있거나 줄의 시작/끝"인 ~~만 <del> 태그로 변환
+        // 정규식 설명: (^|\s) -> 시작 혹은 공백, ~~ -> 물결, (.+?) -> 내용, ~~ -> 물결, (\s|$) -> 공백 혹은 끝
+        // cleanMarkdown = cleanMarkdown.replace(/(^|\s)~~(.+?)~~(\s|$)/gm, '$1<del>$2</del>$3');
+
+        // (2) 위에서 변환되지 않은 나머지 모든 ~~는 이스케이프(\~~) 처리하여 문자로 출력되게 함
+        cleanMarkdown = cleanMarkdown.replace(/~/g, '\\~');
 
         const rawHtml = await marked.parse(cleanMarkdown, { breaks: true, gfm: true });
         const sanitizedHtml = DOMPurify.sanitize(rawHtml);
